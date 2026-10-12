@@ -10,6 +10,13 @@
 
 If the build fails, send the error text back.
 
+## Releases (GitHub)
+Every push is built automatically (Actions tab → Build → the jar is under
+"Artifacts"). To publish a new release, change `version=` in
+`gradle.properties` and push to `main`: the Release workflow builds the mod,
+creates the tag `v<version>` and a GitHub Release with the jar attached.
+Pushes that don't change the version don't create a release.
+
 ## Features
 A harder, more rewarding survival: monsters lurk in caves, villagers and
 illagers are gone, Beta-style hunger and healing return, and loot gets better

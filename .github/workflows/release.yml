@@ -1,43 +1,74 @@
 name: Release
 
-# Push a tag like v1.9.0 to build the mod and publish it as a GitHub Release.
-# The tag must match `version` in gradle.properties.
+# Publishes a GitHub Release (tag v<version>, jar attached) whenever `main`
+# contains a `version` in gradle.properties that has not been released yet.
+#
+# To release a new version: bump `version=` in gradle.properties and push to
+# main. Pushes that don't change the version just skip the release step.
+# Pushing a v* tag yourself, or "Run workflow" on the Actions tab, also works.
 on:
   push:
+    branches: [main]
     tags: ["v*"]
+  workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v5
+
+      - name: Read mod version
+        id: version
+        run: |
+          VERSION=$(grep '^version=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')
+          echo "tag=v${VERSION}" >> "$GITHUB_OUTPUT"
+          if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "${GITHUB_REF_NAME}" != "v${VERSION}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match version=${VERSION} in gradle.properties"
+            exit 1
+          fi
+          if gh release view "v${VERSION}" -R "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "Release v${VERSION} already exists - nothing to do."
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-java@v5
+        if: steps.version.outputs.needed == 'true'
         with:
           distribution: temurin
           java-version: "25"
+
       - uses: gradle/actions/setup-gradle@v5
-      - name: Check tag matches mod version
-        run: |
-          MOD_VERSION=$(grep '^version=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')
-          if [ "v${MOD_VERSION}" != "${GITHUB_REF_NAME}" ]; then
-            echo "::error::Tag ${GITHUB_REF_NAME} does not match version=${MOD_VERSION} in gradle.properties"
-            exit 1
-          fi
+        if: steps.version.outputs.needed == 'true'
+
       - name: Build
+        if: steps.version.outputs.needed == 'true'
         run: |
           chmod +x gradlew
           ./gradlew build --stacktrace
+
       - uses: softprops/action-gh-release@v2
+        if: steps.version.outputs.needed == 'true'
         with:
-          name: Survival Tweaks ${{ github.ref_name }}
+          tag_name: ${{ steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: Survival Tweaks ${{ steps.version.outputs.tag }}
           body: |
-            Survival Tweaks ${{ github.ref_name }} for Minecraft 26.3 (Fabric).
+            Survival Tweaks ${{ steps.version.outputs.tag }} for Minecraft 26.3 (Fabric).
 
             Requires Fabric Loader 0.19.5+ and Fabric API. Install on both client and server.
-            Full feature list: [FEATURES.md](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/FEATURES.md)
+            Full feature list: [FEATURES.md](https://github.com/${{ github.repository }}/blob/${{ steps.version.outputs.tag }}/FEATURES.md)
           files: |
             build/libs/survivaltweaks-*.jar
           fail_on_unmatched_files: true
