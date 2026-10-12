@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "survivaltweaks",
+	"version": "${version}",
+	"name": "Survival Tweaks",
+	"description": "A harder, more rewarding survival: monsters lurk in caves, villagers and illagers are gone, Beta-style hunger and healing return, and loot gets better the deeper you go.",
+	"authors": [
+		"ppcharcoal"
+	],
+	"license": "MIT",
+	"icon": "assets/survivaltweaks/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.survivaltweaks.SurvivalTweaks"
+		],
+		"client": [
+			"com.survivaltweaks.client.BetaHud"
+		]
+	},
+	"mixins": [
+		"survivaltweaks.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

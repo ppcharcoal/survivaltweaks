@@ -1,0 +1,16 @@
+{
+  "values": [
+    "minecraft:villager",
+    "minecraft:zombie_villager",
+    "minecraft:wandering_trader",
+    "minecraft:trader_llama",
+    "minecraft:pillager",
+    "minecraft:vindicator",
+    "minecraft:evoker",
+    "minecraft:vex",
+    "minecraft:illusioner",
+    "minecraft:ravager",
+    "minecraft:witch",
+    "minecraft:phantom"
+  ]
+}

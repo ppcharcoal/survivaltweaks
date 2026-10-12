@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:zombie",
+    "minecraft:husk",
+    "minecraft:drowned",
+    "minecraft:skeleton",
+    "minecraft:stray",
+    { "id": "minecraft:bogged", "required": false },
+    { "id": "minecraft:parched", "required": false },
+    "minecraft:creeper",
+    "minecraft:spider",
+    "minecraft:slime",
+    "minecraft:enderman"
+  ]
+}

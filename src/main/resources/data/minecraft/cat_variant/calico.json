@@ -1,0 +1,16 @@
+{
+  "asset_id": "minecraft:entity/cat/cat_calico",
+  "baby_asset_id": "minecraft:entity/cat/cat_calico_baby",
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#survivaltweaks:cat_variant/cherry"
+      },
+      "priority": 1
+    },
+    {
+      "priority": 0
+    }
+  ]
+}

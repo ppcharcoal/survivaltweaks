@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "survivaltweaks:gamerules/no_patrols",
+      "required": false
+    },
+    {
+      "id": "survivaltweaks:gamerules/no_wandering_traders",
+      "required": false
+    },
+    {
+      "id": "survivaltweaks:gamerules/no_raids",
+      "required": false
+    },
+    {
+      "id": "survivaltweaks:gamerules/no_phantoms",
+      "required": false
+    }
+  ]
+}

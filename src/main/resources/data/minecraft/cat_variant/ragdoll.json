@@ -1,0 +1,13 @@
+{
+  "asset_id": "minecraft:entity/cat/cat_ragdoll",
+  "baby_asset_id": "minecraft:entity/cat/cat_ragdoll_baby",
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#survivaltweaks:cat_variant/cold"
+      },
+      "priority": 1
+    }
+  ]
+}

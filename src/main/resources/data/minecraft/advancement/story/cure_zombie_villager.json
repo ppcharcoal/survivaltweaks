@@ -1,0 +1,11 @@
+{
+  "__comment": "REMOVED by Survival Tweaks: Zombie Doctor - needs a zombie villager. The condition below is always false, so Fabric skips this file and the vanilla advancement is not loaded.",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:not",
+      "value": {
+        "condition": "fabric:true"
+      }
+    }
+  ]
+}

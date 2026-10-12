@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rotten_flesh": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": "minecraft:rotten_flesh" }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [ "has_rotten_flesh" ]
+  ],
+  "rewards": {
+    "recipes": [
+      "survivaltweaks:leather_from_smoking"
+    ]
+  }
+}

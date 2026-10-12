@@ -1,0 +1,25 @@
+# Gradle / build output
+.gradle/
+build/
+out/
+run/
+remappedSrc/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+bin/
+.classpath
+.project
+.settings/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db

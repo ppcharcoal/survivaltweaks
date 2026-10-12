@@ -1,0 +1,16 @@
+{
+  "asset_id": "minecraft:entity/cat/cat_black",
+  "baby_asset_id": "minecraft:entity/cat/cat_black_baby",
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#survivaltweaks:cat_variant/dark"
+      },
+      "priority": 1
+    },
+    {
+      "priority": 0
+    }
+  ]
+}
